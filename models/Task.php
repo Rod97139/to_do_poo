@@ -99,7 +99,7 @@ class Task  extends Model
      */
     public function insert() : void
     {
-        $stmt = $this->pdo->prepare("INSERT INTO task (`task_name`, `to_do_at`, `is_done`) VALUES (:email, :password, :is_done)");
+        $stmt = $this->pdo->prepare("INSERT INTO task (`task_name`, `to_do_at`, `is_done`) VALUES (:task_name, :to_do_at, :is_done)");
 
         $stmt->execute([
             "task_name" => $this->task_name,
