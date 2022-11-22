@@ -93,6 +93,21 @@ class Task  extends Model
         $this->id_user = $id_user;
     }
 
+    /**
+     * Insérer une task dans la BDD
+     * @return void
+     */
+    public function insert() : void
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO task (`task_name`, `to_do_at`, `is_done`) VALUES (:email, :password, :is_done)");
+
+        $stmt->execute([
+            "task_name" => $this->task_name,
+            "to_do_at" => $this->to_do_at,
+            "is_done" => "0"
+        ]);
+    }
+
 
 
 }
