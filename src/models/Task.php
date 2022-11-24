@@ -7,8 +7,9 @@ class Task  extends Model
     private int $id;
     private string $name;
     private string $to_do_at; // TODO change type
-    private bool $is_done;
+    private bool $is_done = false;
     private int $id_user;
+    protected string $table_name = "task";
 
 
 
@@ -94,21 +95,22 @@ class Task  extends Model
     }
 
     /**
-     * Insérer une task dans la BDD
-     * @return void
+     * Insérer une tache dans la BDD
+     * @return int|false l'id du dernier élément inséré ou false dans le cas d'échec
      */
-    public function insert() : void
+    public function insert() : int|false
     {
-        $stmt = $this->pdo->prepare("INSERT INTO task (`task_name`, `to_do_at`, `is_done`) VALUES (:task_name, :to_do_at, :is_done)");
+        $stmt = $this->pdo->prepare("INSERT INTO task (`name`, `to_do_at`, `is_done`,`id_user`) VALUES (:name, :to_do_at, :is_done, :id_user)");
 
         $stmt->execute([
-            "task_name" => $this->task_name,
-            "to_do_at" => $this->to_do_at,
-            "is_done" => "0"
+            'name' => $this->name,
+            'to_do_at' => $this->to_do_at,
+            'is_done' => $this->is_done,
+            'id_user' => $this->id_user,
         ]);
+
+        return $this->pdo->lastInsertId();
     }
-
-
 
 }
 
