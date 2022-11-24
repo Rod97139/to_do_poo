@@ -17,8 +17,8 @@ abstract class Controller
 
         extract($params);
         ob_start() ;
-        require_once "views/$view_name.php";
+        require_once "src/views/$view_name.php";
         $content = ob_get_clean();
-        require_once 'views/layout.php';
+        require_once 'src/views/layout.php';
     }
 }

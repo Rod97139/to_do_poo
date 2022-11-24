@@ -30,7 +30,7 @@ class Task  extends Model
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->task_name;
     }
 
     /**
@@ -39,7 +39,7 @@ class Task  extends Model
      */
     public function setName(string $name): void
     {
-        $this->name = $name;
+        $this->task_name = $name;
     }
 
     /**
@@ -100,10 +100,10 @@ class Task  extends Model
      */
     public function insert() : int|false
     {
-        $stmt = $this->pdo->prepare("INSERT INTO task (`name`, `to_do_at`, `is_done`,`id_user`) VALUES (:name, :to_do_at, :is_done, :id_user)");
+        $stmt = $this->pdo->prepare("INSERT INTO task (`task_name`, `to_do_at`, `is_done`,`id_user`) VALUES (:name, :to_do_at, :is_done, :id_user)");
 
         $stmt->execute([
-            'name' => $this->name,
+            'name' => $this->task_name,
             'to_do_at' => $this->to_do_at,
             'is_done' => $this->is_done,
             'id_user' => $this->id_user,
